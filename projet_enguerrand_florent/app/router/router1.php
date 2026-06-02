@@ -4,7 +4,7 @@
 require ('../controller/ControllerVin.php');
 require ('../controller/ControllerCave.php');
 require ('../controller/ControllerProducteur.php');
-require ('../controller/ControllerAmelioration.php');
+require ('../controller/ControllerExaminateur.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -37,8 +37,8 @@ switch ($action) {
   ControllerProducteur::$action();
   break;
 
- case "amelioration" :
-  ControllerAmelioration::$action();
+ case "superglobales" :
+  ControllerExaminateur::$action();
   break;
 
  // Tache par défaut
