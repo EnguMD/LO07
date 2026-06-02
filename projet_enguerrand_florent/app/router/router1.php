@@ -3,8 +3,8 @@
 <?php
 require ('../controller/ControllerVin.php');
 require ('../controller/ControllerCave.php');
-require ('../controller/ControllerProducteur.php');
 require ('../controller/ControllerExaminateur.php');
+require ('../controller/ControllerSeConnecter.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -27,19 +27,18 @@ switch ($action) {
     break;
 
   
- case "producteurReadAll" :
- case "producteurRegion" :
- case "producteurParRegion" :
- case "producteurReadOne" :
- case "producteurReadId" :
- case "producteurCreate" :
- case "producteurCreated" :
-  ControllerProducteur::$action();
-  break;
+
 
  case "superglobales" :
   ControllerExaminateur::$action();
   break;
+
+
+ case "login" :
+ case "deconnexion" :
+  ControllerSeConnecter::$action();
+  break;
+
 
  // Tache par défaut
  default:
