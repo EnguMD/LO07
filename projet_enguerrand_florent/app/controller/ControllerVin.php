@@ -19,9 +19,9 @@ class ControllerVin {
 
  // Affiche un formulaire pour sélectionner un id qui existe
  public static function vinReadId() {
-  $results = ModelVin::getAllId();
+     $results = ModelVin::getAllId();
 
-  // ----- Construction chemin de la vue
+        // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/vin/viewId.php';
   require ($vue);

@@ -5,14 +5,14 @@ session_start();
 <!-- ----- début viewSuperglobales -->
 <?php
 
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentHeader.html');
 ?>
 
 <body>
   <div class="container">
       <?php
-      include $root . '/app/view/fragment/fragmentCaveMenu.html';
-      include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
+      include $root . '/app/view/fragment/fragmentMenu.html';
+      include $root . '/app/view/fragment/fragmentJumbotron.html';
       ?>
 
       <div>
@@ -66,7 +66,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       ?>
       </div>
   </div>
-  <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
+  <?php include $root . '/app/view/fragment/fragmentFooter.html'; ?>
 
   <!-- ----- fin viewSuperglobales -->
   

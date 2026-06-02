@@ -18,32 +18,28 @@ $action = htmlspecialchars($param["action"]);
 
 // --- Liste des méthodes autorisées
 switch ($action) {
- case "vinReadAll" :
- case "vinReadOne" :
- case "vinReadId" :
- case "vinCreate" :
- case "vinCreated" :
-  ControllerVin::$action();
-    break;
+    case "vinReadAll" :
+    case "vinReadOne" :
+    case "vinReadId" :
+    case "vinCreate" :
+    case "vinCreated" :
+        ControllerVin::$action();
+        break;
 
-  
+    case "superglobales" :
+        ControllerExaminateur::$action();
+        break;
 
+    case "SeConnecterLogin" :
+    case "SeConnecterConnect" :
+    case "SeConnecterDeconnexion" :
+        ControllerSeConnecter::$action();
+        break;
 
- case "superglobales" :
-  ControllerExaminateur::$action();
-  break;
-
-
- case "login" :
- case "deconnexion" :
-  ControllerSeConnecter::$action();
-  break;
-
-
- // Tache par défaut
- default:
-  $action = "caveAccueil";
-  ControllerCave::$action();
+    // Tache par défaut
+    default:
+        $action = "caveAccueil";
+        ControllerCave::$action();
 }
 ?>
 <!-- ----- Fin Router1 -->
