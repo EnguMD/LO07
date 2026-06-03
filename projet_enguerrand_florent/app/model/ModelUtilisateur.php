@@ -1,0 +1,90 @@
+
+<!-- ----- debut ModelUtilisateur -->
+
+<?php
+require_once 'Model.php';
+
+class ModelUtilisateur {
+
+    // Déclaration des propriétés (bonnes pratiques PHP)
+    private $id;
+    private $nom;
+    private $prenom;
+    private $role;
+    private $login;
+    private $password;
+    private $solde;
+
+    public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $role = NULL, $login = NULL, $password = NULL, $solde = NULL) {
+        // valeurs nulles si pas de passage de paramètres
+        if (!is_null($id)) {
+            $this->id = $id;
+            $this->nom = $nom;
+            $this->prenom = $prenom;
+            $this->role = $role;
+            $this->login = $login;
+            $this->password = $password;
+            $this->solde = $solde;
+        }
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    public function setPrenom($prenom) {
+        $this->prenom = $prenom;
+    }
+
+    public function setRole($role) {
+        $this->role = $role;
+    }
+
+    public function setLogin($login) {
+        $this->login = $login;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
+    }
+
+    public function setSolde($solde) {
+        $this->solde = $solde;
+    }
+
+
+    
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function getPrenom() {
+        return $this->prenom;
+    }
+
+    public function getRole() {
+        return $this->role;
+    }
+
+    public function getLogin() {
+        return $this->login;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function getSolde() {
+        return $this->solde;
+    }
+}
+?>
+<!-- ----- fin ModelUtilisateur -->

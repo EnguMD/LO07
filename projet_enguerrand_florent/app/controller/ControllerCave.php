@@ -12,7 +12,6 @@ class ControllerCave {
    echo ("ControllerProducteur : caveAccueil : vue = $vue");
   require ($vue);
  }
-
 }
 ?>
 <!-- ----- fin ControllerCave -->

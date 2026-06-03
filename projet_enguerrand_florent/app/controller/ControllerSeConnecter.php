@@ -4,6 +4,7 @@ session_start();
 <!-- ----- debut ControllerSeConnecter -->
 <?php
 require_once '../model/ModelSeConnecter.php';
+require_once '../model/ModelUtilisateur.php';
 
 class ControllerSeConnecter {
 
@@ -13,10 +14,13 @@ class ControllerSeConnecter {
         require ($vue);
     }
 
-    public static function SeConnecterConnect() {
+    public static function SeConnecterConnect() { //qd connecté
         $user_login = $_GET['login'];
         $user_password = $_GET['password'];
-        $_SESSION['login_id'] = ModelSeConnecter::connected($user_login, $user_password);
+        $user = ModelSeConnecter::connected($user_login, $user_password);
+        $_SESSION['login_id'] = $user->getLogin();
+        $_SESSION['role'] = $user->getRole();
+        $_SESSION['solde'] = $user->getSolde();
 
         // ----- Construction chemin de la vue
         include 'config.php';

@@ -1,3 +1,7 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}?>
 
 <!-- ----- début fragmentMenu -->
 
@@ -20,7 +24,17 @@
                     </ul>
                 </li>
 
-
+                <?php if ($_SESSION['login_id'] !== -1 ): ?>
+                    <li class = "nav-item dropdown">
+                        <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">VIN</a>
+                        <ul class = "dropdown-menu">
+                            <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
+                            <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
+                            <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
+                        </ul>
+                    </li>
+                <?php endif;
+                ?>
 
 
                 <li class="nav-item dropdown">
