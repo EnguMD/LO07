@@ -1,7 +1,8 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-}?>
+}
+?>
 
 <!-- ----- début fragmentMenu -->
 
@@ -15,26 +16,42 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">VIN</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="router1.php?action=vinReadAll">Liste des vins</a></li>
-                        <li><a class="dropdown-item" href="router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
-                        <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li> 
-                    </ul>
-                </li>
 
-                <?php if ($_SESSION['login_id'] !== -1 ): ?>
-                    <li class = "nav-item dropdown">
-                        <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">VIN</a>
-                        <ul class = "dropdown-menu">
-                            <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
-                            <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
-                            <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
-                        </ul>
-                    </li>
-                <?php endif;
-                ?>
+                <?php
+                if ($_SESSION['login_id'] !== -1):
+                    echo("<a class='navbar-brand'>| " . $_SESSION['login_id'] . " | " . $_SESSION['solde'] . " | </a>");
+                    ?>
+                    <?php if ($_SESSION['role'] === 'administrateur'): ?>
+                        <li class = "nav-item dropdown">
+                            <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Administrateur</a>
+                            <ul class = "dropdown-menu">
+                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['role'] === 'conducteur'): ?>
+                        <li class = "nav-item dropdown">
+                            <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Conducteur</a>
+                            <ul class = "dropdown-menu">
+                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['role'] === 'passager'): ?>
+                        <li class = "nav-item dropdown">
+                            <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Passager</a>
+                            <ul class = "dropdown-menu">
+                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+                <?php endif; ?>
 
 
                 <li class="nav-item dropdown">
