@@ -3,6 +3,7 @@
 <?php
 require ('../controller/ControllerUtilisateur.php');
 require ('../controller/ControllerVehicule.php');
+require ('../controller/ControllerVille.php');
 require ('../controller/ControllerCave.php');
 require ('../controller/ControllerExaminateur.php');
 require ('../controller/ControllerSeConnecter.php');
@@ -25,6 +26,10 @@ switch ($action) {
     
     case "vehiculeReadAll" :
         ControllerVehicule::$action();
+        break;
+    
+    case "villeReadAll" :
+        ControllerVille::$action();
         break;
 
     case "superglobales" :

@@ -27,7 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <ul class = "dropdown-menu">
                                 <li><a class = "dropdown-item" href = "router1.php?action=utilisateurReadAll">Liste des utilisateurs</a></li>
                                 <li><a class = "dropdown-item" href = "router1.php?action=vehiculeReadAll">Liste des véhicules</a></li>
-                                <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=villeReadAll">Liste des villes</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>
