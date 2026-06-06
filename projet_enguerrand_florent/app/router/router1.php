@@ -1,7 +1,7 @@
 
 <!-- ----- debut Router1 -->
 <?php
-require ('../controller/ControllerVin.php');
+require ('../controller/ControllerUtilisateur.php');
 require ('../controller/ControllerCave.php');
 require ('../controller/ControllerExaminateur.php');
 require ('../controller/ControllerSeConnecter.php');
@@ -18,12 +18,12 @@ $action = htmlspecialchars($param["action"]);
 
 // --- Liste des méthodes autorisées
 switch ($action) {
-    case "vinReadAll" :
+    case "utilisateurReadAll" :
     case "vinReadOne" :
     case "vinReadId" :
     case "vinCreate" :
     case "vinCreated" :
-        ControllerVin::$action();
+        ControllerUtilisateur::$action();
         break;
 
     case "superglobales" :

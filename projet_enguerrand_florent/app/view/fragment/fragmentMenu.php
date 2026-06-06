@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <li class = "nav-item dropdown">
                             <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Administrateur</a>
                             <ul class = "dropdown-menu">
-                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=utilisateurReadAll">Liste des utilisateurs</a></li>
                                 <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
                                 <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
                             </ul>

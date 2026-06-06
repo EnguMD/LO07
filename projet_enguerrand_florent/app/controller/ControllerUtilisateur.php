@@ -1,9 +1,9 @@
 
-<!-- ----- debut ControllerVin -->
+<!-- ----- debut ControllerUtilisateur -->
 <?php
 require_once '../model/ModelVin.php';
 
-class ControllerVin {
+class ControllerUtilisateur {
 
 
  // --- Liste des vins
@@ -61,6 +61,6 @@ class ControllerVin {
  
 }
 ?>
-<!-- ----- fin ControllerVin -->
+<!-- ----- fin ControllerUtilisateur -->
 
 
