@@ -19,10 +19,6 @@ $action = htmlspecialchars($param["action"]);
 // --- Liste des méthodes autorisées
 switch ($action) {
     case "utilisateurReadAll" :
-    case "vinReadOne" :
-    case "vinReadId" :
-    case "vinCreate" :
-    case "vinCreated" :
         ControllerUtilisateur::$action();
         break;
 

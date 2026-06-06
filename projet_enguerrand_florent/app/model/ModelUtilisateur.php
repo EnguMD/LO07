@@ -56,8 +56,6 @@ class ModelUtilisateur {
         $this->solde = $solde;
     }
 
-
-    
     public function getId() {
         return $this->id;
     }
@@ -84,6 +82,20 @@ class ModelUtilisateur {
 
     public function getSolde() {
         return $this->solde;
+    }
+
+    public static function getAll() {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from utilisateur";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelUtilisateur");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
     }
 }
 ?>
