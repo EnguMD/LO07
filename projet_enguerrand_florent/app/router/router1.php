@@ -2,6 +2,7 @@
 <!-- ----- debut Router1 -->
 <?php
 require ('../controller/ControllerUtilisateur.php');
+require ('../controller/ControllerVehicule.php');
 require ('../controller/ControllerCave.php');
 require ('../controller/ControllerExaminateur.php');
 require ('../controller/ControllerSeConnecter.php');
@@ -20,6 +21,10 @@ $action = htmlspecialchars($param["action"]);
 switch ($action) {
     case "utilisateurReadAll" :
         ControllerUtilisateur::$action();
+        break;
+    
+    case "vehiculeReadAll" :
+        ControllerVehicule::$action();
         break;
 
     case "superglobales" :

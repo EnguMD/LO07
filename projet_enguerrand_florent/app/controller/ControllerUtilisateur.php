@@ -1,7 +1,7 @@
 
 <!-- ----- debut ControllerUtilisateur -->
 <?php
-require_once '../model/ModelVin.php';
+require_once '../model/ModelUtilisateur.php';
 
 class ControllerUtilisateur {
 

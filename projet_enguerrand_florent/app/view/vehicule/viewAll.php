@@ -14,21 +14,20 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
         <table class = "table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th scope = "col">Nom</th>
-                    <th scope = "col">Prénom</th>
-                    <th scope = "col">Rôle</th>
-                    <th scope = "col">Login</th>
-                    <th scope = "col">Password</th>
-                    <th scope = "col">Solde</th>
+                    <th scope = "col">Marque</th>
+                    <th scope = "col">Modèle</th>
+                    <th scope = "col">Année</th>
+                    <th scope = "col">Immatriculation</th>
+                    <th scope = "col">Propriétaire</th>
                 </tr>
             </thead>
             <tbody>
-                <h5 class='card-title'>Liste des utilisateurs :</h5>
+                <h5 class='card-title'>Liste des véhicules :</h5>
                 <?php
                 // La liste des vins est dans une variable $results             
                 foreach ($results as $element) {
-                    printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%.2f</td></tr>", $element->getNom(),
-                            $element->getPrenom(), $element->getRole(), $element->getLogin(), $element->getPassword(), $element->getSolde());
+                    printf("<tr><td>%s</td><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>", $element->getMarque(),
+                            $element->getModele(), $element->getAnnee(), $element->getImmatriculation(), $element->getProprietaire_id());
                 }
                 ?>
             </tbody>
