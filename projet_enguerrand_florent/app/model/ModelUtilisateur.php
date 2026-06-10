@@ -98,7 +98,7 @@ class ModelUtilisateur {
         }
     }
 
-    public static function insert($nom, $prenom, $role, $login, $password, $solde) {
+    public static function insert($nom, $prenom, $role, $password, $solde) {
         try {
             $database = Model::getInstance();
 
@@ -108,6 +108,7 @@ class ModelUtilisateur {
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
+            $login = strtolower($nom . $prenom);
             // ajout d'un nouveau tuple;
             $query = "insert into utilisateur value (:id, :nom, :prenom, :role, :login, :password, :solde)";
             $statement = $database->prepare($query);

@@ -27,7 +27,7 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                 // La liste des vins est dans une variable $results             
                 foreach ($results as $element) {
                     printf("<tr><td>%s</td><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>", $element->getMarque(),
-                            $element->getModele(), $element->getAnnee(), $element->getImmatriculation(), $element->getProprietaire_id());
+                            $element->getModele(), $element->getAnnee(), $element->getImmatriculation(), $element->getProprietaire());
                 }
                 ?>
             </tbody>

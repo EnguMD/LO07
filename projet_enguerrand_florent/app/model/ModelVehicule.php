@@ -12,9 +12,9 @@ class ModelVehicule {
     private $modele;
     private $annee;
     private $immatriculation;
-    private $proprietaire_id;
+    private $proprietaire;
 
-    public function __construct($id = NULL, $marque = NULL, $modele = NULL, $annee = NULL, $immatriculation = NULL, $proprietaire_id = NULL) {
+    public function __construct($id = NULL, $marque = NULL, $modele = NULL, $annee = NULL, $immatriculation = NULL, $proprietaire = NULL) {
         // valeurs nulles si pas de passage de paramètres
         if (!is_null($id)) {
             $this->id = $id;
@@ -22,7 +22,7 @@ class ModelVehicule {
             $this->modele = $modele;
             $this->annee = $annee;
             $this->immatriculation = $immatriculation;
-            $this->proprietaire_id = $proprietaire_id;
+            $this->proprietaire = $proprietaire;
         }
     }
 
@@ -46,8 +46,8 @@ class ModelVehicule {
         $this->immatriculation = $immatriculation;
     }
 
-    public function setProprietaire_id($proprietaire_id) {
-        $this->proprietaire_id = $proprietaire_id;
+    public function setProprietaire($proprietaire) {
+        $this->proprietaire = $proprietaire;
     }
 
     public function getId() {
@@ -70,15 +70,19 @@ class ModelVehicule {
         return $this->immatriculation;
     }
 
-    public function getProprietaire_id() {
-        return $this->proprietaire_id;
+    public function getProprietaire() {
+        return $this->proprietaire;
     }
 
 
     public static function getAll() {
         try {
             $database = Model::getInstance();
-            $query = "select * from vehicule";
+            $query = "select marque, modele, annee, immatriculation, 
+                CONCAT(prenom, ' ', nom) AS proprietaire
+                      from vehicule, utilisateur 
+                      where vehicule.proprietaire_id = utilisateur.id
+                      order by proprietaire";
             $statement = $database->prepare($query);
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelVehicule");
