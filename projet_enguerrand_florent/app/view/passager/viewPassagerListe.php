@@ -36,9 +36,9 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                         $row = $resultats->fetch();
                         if (!$row) {
                             foreach ($results as $element) {
-                        printf("<tr><td>%d</td><td>%s</td><td>%d</td><td>%.2f</td></tr>", $element->getDate_depart(),
-                                $element->getHeure_depart(), $element->getDepart(), $element->getDestination(),
-                                $element->getConducteur(), $element->getModele(), $element->getImmatriculation());
+                        printf("<tr><td>%a</td><td>%T</td><td>%d</td><td>%.2f</td></tr>", $element->getDate_depart(),
+                                $element->getHeure_depart(), $element->getVille_depart(), $element->getVille_arrivee(),
+                                $element->getProprietaire(), $element->getModele(), $element->getImmatriculation());
                     }
                             echo "Le vin avec l'id 2000 est présent.";
                         }
