@@ -30,6 +30,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <li><a class = "dropdown-item" href = "router1.php?action=utilisateurAddPassager">Ajout d'un passager</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class = "dropdown-item" href = "router1.php?action=vehiculeReadAll">Liste des véhicules</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=VehiculeAdd">Ajout d'un véhicule</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="router1.php?action=villeReadAll">Liste des villes</a></li>
                             </ul>
