@@ -29,14 +29,17 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                 <tbody>
                     <?php
                     echo('</div>  <div class="mt-4 p-5 bg-primary text-white rounded">');
-                    $requete = "select * from trajet where passager_id = 2000";
-                    echo ('<h3> Vérification de la transaction avec ' . $requete9 . '</h3>');
+                    $requete = "select * from trajet where passager_id = $SESSION[login_id]";
+                    echo ('<h3> Vérification de la transaction avec ' . $requete . '</h3>');
                     try {
-                        $resultats9 = $database->query($requete9);
-                        $row9 = $resultats9->fetch();
-                        if (!$row9) {
-                            echo "Le vin avec l'id 2000 n'est pas présent dans la base.";
-                        } else {
+                        $resultats = $database->query($requete);
+                        $row = $resultats->fetch();
+                        if (!$row) {
+                            foreach ($results as $element) {
+                        printf("<tr><td>%d</td><td>%s</td><td>%d</td><td>%.2f</td></tr>", $element->getDate_depart(),
+                                $element->getHeure_depart(), $element->getDepart(), $element->getDestination(),
+                                $element->getConducteur(), $element->getModele(), $element->getImmatriculation());
+                    }
                             echo "Le vin avec l'id 2000 est présent.";
                         }
                     } catch (Exception $ex) {
@@ -46,10 +49,7 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                     echo('</div>
     <div class="mt-4 p-5 bg-primary text-white rounded">');
 
-                    foreach ($results as $element) {
-                        printf("<tr><td>%d</td><td>%s</td><td>%d</td><td>%.2f</td></tr>", $element->getId(),
-                                $element->getCru(), $element->getAnnee(), $element->getDegre());
-                    }
+                    
                     ?>
                 </tbody>
             </table>
