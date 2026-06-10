@@ -36,56 +36,72 @@ class ModelUtilisateur {
         $this->id = $id;
     }
 
-    public function setNom($nom) {
-        $this->nom = $nom;
+    public function setVille_depart($ville_depart) {
+        $this->ville_depart = $ville_depart;
     }
 
     public function setVille_arrivee($ville_arrivee) {
         $this->ville_arrivee = $ville_arrivee;
     }
 
-    public function setRole($role) {
-        $this->role = $role;
+    public function setConducteur_id($conducteur_id) {
+        $this->conducteur_id = $conducteur_id;
     }
 
-    public function setLogin($login) {
-        $this->login = $login;
+    public function setVehicule_id($vehicule_id) {
+        $this->vehicule_id = $vehicule_id;
     }
 
-    public function setPassword($password) {
-        $this->password = $password;
+    public function setPrix($prix) {
+        $this->prix = $prix;
     }
 
-    public function setSolde($solde) {
-        $this->solde = $solde;
+    public function setDate_depart($date_depart) {
+        $this->date_depart = $date_depart;
+    }
+    
+    public function setHeure_depart($heure_depart) {
+        $this->heure_depart = $heure_depart;
+    }
+    
+    public function setStatut($statut) {
+        $this->statut = $statut;
     }
 
     public function getId() {
         return $this->id;
     }
 
-    public function getNom() {
-        return $this->nom;
+    public function getVille_depart() {
+        return $this->ville_depart;
     }
 
     public function getVille_arrivee() {
         return $this->ville_arrivee;
     }
 
-    public function getRole() {
-        return $this->role;
+    public function getConducteur_id() {
+        return $this->conducteur_id;
     }
 
-    public function getLogin() {
-        return $this->login;
+    public function getVehicule_id() {
+        return $this->vehicule_id;
     }
 
-    public function getPassword() {
-        return $this->password;
+    public function getPrix() {
+        return $this->prix;
     }
 
-    public function getSolde() {
-        return $this->solde;
+    public function getDate_depart() {
+        return $this->date_depart;
+    }
+    
+    public function getDate2_depart() {
+        return $this->date_depart;
+    }
+    
+    public function getDate3_depart() {
+        return $this->date_depart;
     }
 
     public static function getAll() {
