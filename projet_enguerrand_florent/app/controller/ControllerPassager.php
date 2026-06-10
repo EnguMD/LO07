@@ -27,7 +27,7 @@ class ControllerPassager {
     public static function PassagerCreated() {
         // ajouter une validation des informations du formulaire
         $results = ModelUtilisateur::insert(
-                htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), "passager", "gg", "secret", htmlspecialchars($_GET['solde'])
+                htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), "passager", "secret", htmlspecialchars($_GET['solde'])
         );
         // ----- Construction chemin de la vue
         include 'config.php';

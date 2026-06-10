@@ -30,7 +30,7 @@ class ControllerConducteur {
  public static function ConducteurCreated() {
   // ajouter une validation des informations du formulaire
   $results = ModelUtilisateur::insert(
-      htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), "conducteur", "gg", "secret", htmlspecialchars($_GET['solde'])
+      htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), "conducteur", "secret", htmlspecialchars($_GET['solde'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';
