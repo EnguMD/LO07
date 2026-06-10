@@ -5,7 +5,7 @@ class ControllerPassager {
 
     // --- Liste des réservations
     public static function passagerListe() {
-        $results = ModelPassager::getAll();
+        $results = ModelUtilisateur::getAll();
         // ----- Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/passager/viewPassagerListe.php';
