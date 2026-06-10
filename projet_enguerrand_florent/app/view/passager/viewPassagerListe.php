@@ -29,7 +29,7 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                 <tbody>
                     <?php
                     echo('</div>  <div class="mt-4 p-5 bg-primary text-white rounded">');
-                    $requete = "select * from vin where id = 2000";
+                    $requete = "select * from trajet where passager_id = 2000";
                     echo ('<h3> Vérification de la transaction avec ' . $requete9 . '</h3>');
                     try {
                         $resultats9 = $database->query($requete9);
