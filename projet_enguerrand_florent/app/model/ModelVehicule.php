@@ -92,6 +92,36 @@ class ModelVehicule {
             return NULL;
         }
     }
+
+
+    public static function insert($marque, $modele, $annee, $immatriculation, $proprietaire) {
+        try {
+            $database = Model::getInstance();
+
+            // recherche de la valeur de la clé = max(id) + 1
+            $query = "select max(id) from vehicule";
+            $statement = $database->query($query);
+            $tuple = $statement->fetch();
+            $id = $tuple['0'];
+            $id++;
+            $login = strtolower($nom . $prenom);
+            // ajout d'un nouveau tuple;
+            $query = "insert into vehicule value (:id, :marque, :modele, :annee, :immatriculation, :proprietaire)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id,
+                'marque' => $marque,
+                'modele' => $modele,
+                'annee' => $annee,
+                'immatriculation' => $immatriculation,
+                'proprietaire' => $proprietaire,
+            ]);
+            return $id;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1;
+        }
+    }
 }
 ?>
 <!-- ----- fin ModelVehicule -->

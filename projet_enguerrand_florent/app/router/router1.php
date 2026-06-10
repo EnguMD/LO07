@@ -27,6 +27,8 @@ switch ($action) {
         break;
 
     case "vehiculeReadAll" :
+    case "VehiculeAdd" :
+    case "VehiculeCreated" :
         ControllerVehicule::$action();
         break;
 
