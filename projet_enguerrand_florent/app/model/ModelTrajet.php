@@ -4,7 +4,7 @@
 <?php
 require_once 'Model.php';
 
-class ModelUtilisateur {
+class ModelTrajet {
 
     // Déclaration des propriétés (bonnes pratiques PHP)
     private $id;
@@ -96,21 +96,21 @@ class ModelUtilisateur {
         return $this->date_depart;
     }
     
-    public function getDate2_depart() {
-        return $this->date_depart;
+    public function getHeure_depart() {
+        return $this->heure_depart;
     }
     
-    public function getDate3_depart() {
-        return $this->date_depart;
+    public function getStatut() {
+        return $this->statut;
     }
 
     public static function getAll() {
         try {
             $database = Model::getInstance();
-            $query = "select * from utilisateur";
+            $query = "select * from trajet";
             $statement = $database->prepare($query);
             $statement->execute();
-            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelUtilisateur");
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelTrajet");
             return $results;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -119,4 +119,4 @@ class ModelUtilisateur {
     }
 }
 ?>
-<!-- ----- fin ModelUtilisateur -->
+<!-- ----- fin ModelTrajet-->
