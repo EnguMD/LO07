@@ -97,6 +97,35 @@ class ModelUtilisateur {
             return NULL;
         }
     }
+    
+    
+    
+ public static function insert($cru, $annee, $degre) {
+  try {
+   $database = Model::getInstance();
+
+   // recherche de la valeur de la clé = max(id) + 1
+   $query = "select max(id) from vin";
+   $statement = $database->query($query);
+   $tuple = $statement->fetch();
+   $id = $tuple['0'];
+   $id++;
+
+   // ajout d'un nouveau tuple;
+   $query = "insert into vin value (:id, :cru, :annee, :degre)";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'id' => $id,
+     'cru' => $cru,
+     'annee' => $annee,
+     'degre' => $degre
+   ]);
+   return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return -1;
+  }
+ }
 }
 ?>
 <!-- ----- fin ModelUtilisateur -->
