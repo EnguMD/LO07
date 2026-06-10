@@ -16,13 +16,13 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
      echo ("<h3>Le nouveau conducteur a été ajouté </h3>");
      echo("<ul>");
      echo ("<li>id = " . $results . "</li>");
-     echo ("<li>cru = " . $_GET['cru'] . "</li>");
-     echo ("<li>annee = " . $_GET['annee'] . "</li>");
-     echo ("<li>degre = " . $_GET['degre'] . "</li>");
+     echo ("<li>nom = " . $_GET['nom'] . "</li>");
+     echo ("<li>prenom = " . $_GET['prenom'] . "</li>");
+     echo ("<li>solde = " . $_GET['solde'] . "</li>");
      echo("</ul>");
     } else {
-     echo ("<h3>Problème d'insertion du Vin</h3>");
-     echo ("id = " . $_GET['cru']);
+     echo ("<h3>Problème d'insertion du Conducteur</h3>");
+     echo ("id = " . $_GET['nom']);
     }
 
     echo("</div>");

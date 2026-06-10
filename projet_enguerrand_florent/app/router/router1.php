@@ -42,6 +42,8 @@ switch ($action) {
     case "passagerListe" :
     case "passagerReservation" :
     case "passagerInnovation" :
+    case "utilisateurAddPassager" :
+    case "PassagerCreated" :
         ControllerPassager::$action();
         break;
 
