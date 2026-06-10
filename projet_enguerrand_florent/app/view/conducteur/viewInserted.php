@@ -1,19 +1,19 @@
 
 <!-- ----- début viewInserted -->
 <?php
-require ($root . '/app/view/fragment/fragmentCaveHeader.html');
+require ($root . '/app/view/fragment/fragmentHeader.html');
 ?>
 
 <body>
   <div class="container">
     <?php
-    include $root . '/app/view/fragment/fragmentCaveMenu.html';
-    include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
+    include $root . '/app/view/fragment/fragmentMenu.php';
+    include $root . '/app/view/fragment/fragmentJumbotron.html';
     ?>
     <!-- ===================================================== -->
     <?php
     if ($results) {
-     echo ("<h3>Le nouveau vin a été ajouté </h3>");
+     echo ("<h3>Le nouveau conducteur a été ajouté </h3>");
      echo("<ul>");
      echo ("<li>id = " . $results . "</li>");
      echo ("<li>cru = " . $_GET['cru'] . "</li>");
@@ -27,7 +27,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 
     echo("</div>");
     
-    include $root . '/app/view/fragment/fragmentCaveFooter.html';
+    include $root . '/app/view/fragment/fragmentFooter.html';
     ?>
     <!-- ----- fin viewInserted -->    
 
