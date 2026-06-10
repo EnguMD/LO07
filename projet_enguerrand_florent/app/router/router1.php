@@ -2,6 +2,8 @@
 <!-- ----- debut Router1 -->
 <?php
 require ('../controller/ControllerUtilisateur.php');
+require ('../controller/ControllerConducteur.php');
+require ('../controller/ControllerPassager.php');
 require ('../controller/ControllerVehicule.php');
 require ('../controller/ControllerVille.php');
 require ('../controller/ControllerCave.php');
@@ -23,11 +25,11 @@ switch ($action) {
     case "utilisateurReadAll" :
         ControllerUtilisateur::$action();
         break;
-    
+
     case "vehiculeReadAll" :
         ControllerVehicule::$action();
         break;
-    
+
     case "villeReadAll" :
         ControllerVille::$action();
         break;
@@ -35,12 +37,16 @@ switch ($action) {
     case "superglobales" :
         ControllerExaminateur::$action();
         break;
-    
+
     // Tache par défaut
     case "passagerListe" :
     case "passagerReservation" :
     case "passagerInnovation" :
         ControllerPassager::$action();
+        break;
+
+    case "utilisateurAddConducteur" :
+        ControllerConducteur::$action();
         break;
 
     case "SeConnecterLogin" :
