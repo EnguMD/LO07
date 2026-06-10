@@ -18,23 +18,23 @@ class ControllerConducteur {
  
  
  // Affiche le formulaire de creation d'un vin
- public static function vinCreate() {
+ public static function utilisateurAddConducteur() {
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewInsert.php';
+  $vue = $root . '/app/view/conducteur/viewInsert.php';
   require ($vue);
  }
 
  // Affiche un formulaire pour récupérer les informations d'un nouveau vin.
  // La clé est gérée par le systeme et pas par l'internaute
- public static function vinCreated() {
+ public static function ConducteurCreated() {
   // ajouter une validation des informations du formulaire
-  $results = ModelVin::insert(
-      htmlspecialchars($_GET['cru']), htmlspecialchars($_GET['annee']), htmlspecialchars($_GET['degre'])
+  $results = ModelUtilisateur::insert(
+      htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), "conducteur", "gg", "secret", htmlspecialchars($_GET['solde'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/vin/viewInserted.php';
+  $vue = $root . '/app/view/conducteur/viewInserted.php';
   require ($vue);
  }
  

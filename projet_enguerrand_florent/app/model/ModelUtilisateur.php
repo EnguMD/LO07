@@ -97,35 +97,35 @@ class ModelUtilisateur {
             return NULL;
         }
     }
-    
-    
-    
- public static function insert($cru, $annee, $degre) {
-  try {
-   $database = Model::getInstance();
 
-   // recherche de la valeur de la clé = max(id) + 1
-   $query = "select max(id) from vin";
-   $statement = $database->query($query);
-   $tuple = $statement->fetch();
-   $id = $tuple['0'];
-   $id++;
+    public static function insert($nom, $prenom, $role, $login, $password, $solde) {
+        try {
+            $database = Model::getInstance();
 
-   // ajout d'un nouveau tuple;
-   $query = "insert into vin value (:id, :cru, :annee, :degre)";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id,
-     'cru' => $cru,
-     'annee' => $annee,
-     'degre' => $degre
-   ]);
-   return $id;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return -1;
-  }
- }
+            // recherche de la valeur de la clé = max(id) + 1
+            $query = "select max(id) from utilisateur";
+            $statement = $database->query($query);
+            $tuple = $statement->fetch();
+            $id = $tuple['0'];
+            $id++;
+            // ajout d'un nouveau tuple;
+            $query = "insert into utilisateur value (:id, :nom, :prenom, :role, :login, :password, :solde)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'role' => $role,
+                'login' => $login,
+                'password' => $password,
+                'solde' => $solde
+            ]);
+            return $id;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1;
+        }
+    }
 }
 ?>
 <!-- ----- fin ModelUtilisateur -->

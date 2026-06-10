@@ -46,6 +46,7 @@ switch ($action) {
         break;
 
     case "utilisateurAddConducteur" :
+    case "ConducteurCreated" :
         ControllerConducteur::$action();
         break;
 
