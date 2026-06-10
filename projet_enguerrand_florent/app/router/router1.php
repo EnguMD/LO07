@@ -35,6 +35,13 @@ switch ($action) {
     case "superglobales" :
         ControllerExaminateur::$action();
         break;
+    
+    // Tache par défaut
+    case "passagerListe" :
+    case "passagerReservation" :
+    case "passagerInnovation" :
+        ControllerPassager::$action();
+        break;
 
     case "SeConnecterLogin" :
     case "SeConnecterConnect" :

@@ -5,7 +5,7 @@
 class ControllerExaminateur {
 
 
- // --- Liste des vins
+ // --- Liste des superglobales
  public static function superglobales() {
   include 'config.php';
   $vue = $root . '/app/view/examinateur/viewSuperglobales.php';

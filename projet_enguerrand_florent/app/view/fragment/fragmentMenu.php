@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <?php
                 if ($_SESSION['login_id'] !== -1):
-                    echo("<a class='navbar-brand'>| " . $_SESSION['login_id'] . " | " . $_SESSION['solde'] . " | </a>");
+                    echo("<a class='navbar-brand'>| " . $_SESSION['login_id'] . " | " . $_SESSION['solde'] ."€". " | </a>");
                     ?>
                     <?php if ($_SESSION['role'] === 'administrateur'): ?>
                         <li class = "nav-item dropdown">
@@ -45,9 +45,9 @@ if (session_status() === PHP_SESSION_NONE) {
                         <li class = "nav-item dropdown">
                             <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Passager</a>
                             <ul class = "dropdown-menu">
-                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
-                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
-                                <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=passagerListe">Liste de mes réservations</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=passagerReservation">Réservation d’un trajet actif</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=passagerInnovation">Innovation</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>
