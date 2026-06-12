@@ -117,6 +117,11 @@ class ModelTrajet {
             return NULL;
         }
     }
+   
+}
+
+
+?>
 }
 ?>
 <!-- ----- fin ModelTrajet-->

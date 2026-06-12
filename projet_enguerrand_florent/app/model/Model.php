@@ -2,6 +2,7 @@
 <!-- ----- debut Model -->
 <?php
 
+
 class Model extends PDO {
 
  private static $_instance;
@@ -15,6 +16,7 @@ class Model extends PDO {
   // les variables sont définies dans le fichier config.php
   include_once '../controller/config.php';
   
+  include '../controller/config.php';
   if (DEBUG) echo ("Model : getInstance : dsn = $dsn</br>");
 
   $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);

@@ -28,25 +28,29 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                 </thead>
                 <tbody>
                     <?php
-                    echo('<div class="mt-4 p-5 bg-primary text-white rounded">');
-                    $requete = "select * from trajet where passager_id = $SESSION[login_id]";
+                    $requete = "SELECT trajet.date_depart, trajet.heure_depart, trajet.ville_depart, trajet.ville_arrivee, vehicule.modele, vehicule.immatriculation, "
+                            . "CONCAT(conducteur.prenom, ' ', conducteur.nom) AS proprietaire "
+                            . "FROM trajet, vehicule, reservation, utilisateur AS passager, utilisateur AS conducteur "
+                            . "WHERE passager.login = '{$_SESSION['login_id']}' "
+                            . "AND passager.id = reservation.passager_id "
+                            . "AND vehicule.id = trajet.vehicule_id "
+                            . "AND trajet.id = reservation.trajet_id "
+                            . "AND conducteur.id = trajet.conducteur_id";
                     echo ('<h3> Vérification de la transaction avec ' . $requete . '</h3>');
                     try {
-                        $resultats = $database->query($requete);
-                        $row = $resultats->fetch();
-                        if (!$row) {
-                            foreach ($results as $element) {
-                        printf("<tr><td>%Y-%m-%d</td><td>%T</td><td>%s</td><td>%s</td>td>%s</td>td>%s</td>td>%s</td></tr>", $element->getDate_depart(),
-                                $element->getHeure_depart(), $element->getVille_depart(), $element->getVille_arrivee(),
-                                $element->getProprietaire(), $element->getModele(), $element->getImmatriculation());
-                    }
-                            echo "Fonctionne.";
+                        $database = Model::getInstance();
+                        $results = $database->query($requete);
+                        $results->setFetchMode(PDO::FETCH_OBJ);
+                        foreach ($results as $element) {
+                            printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->date_depart,
+                                    $element->heure_depart, $element->ville_depart, $element->ville_arrivee,
+                                    $element->proprietaire, $element->modele, $element->immatriculation);
                         }
+                        echo "Fonctionne.";
                     } catch (Exception $ex) {
-                        echo'fonctionne pas';
+                        echo $ex->getMessage();
                     }
                     ?>
-                    </div>  
                 </tbody>
             </table>
         </div>

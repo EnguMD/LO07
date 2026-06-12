@@ -9,6 +9,7 @@ require ('../controller/ControllerVille.php');
 require ('../controller/ControllerCave.php');
 require ('../controller/ControllerExaminateur.php');
 require ('../controller/ControllerSeConnecter.php');
+require_once ('../controller/ControllerPassager.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
