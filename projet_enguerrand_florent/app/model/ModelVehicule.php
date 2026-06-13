@@ -74,7 +74,6 @@ class ModelVehicule {
         return $this->proprietaire;
     }
 
-
     public static function getAll() {
         try {
             $database = Model::getInstance();
@@ -93,6 +92,22 @@ class ModelVehicule {
         }
     }
 
+    public static function getAllPropietaire() {
+        try {
+            $database = Model::getInstance();
+            $query = "select distinct CONCAT(prenom, ' ', nom) AS proprietaire
+                      from vehicule, utilisateur 
+                      where vehicule.proprietaire_id = utilisateur.id
+                      order by proprietaire";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
     public static function insert($marque, $modele, $annee, $immatriculation, $proprietaire) {
         try {
@@ -104,7 +119,6 @@ class ModelVehicule {
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
-            $login = strtolower($nom . $prenom);
             // ajout d'un nouveau tuple;
             $query = "insert into vehicule value (:id, :marque, :modele, :annee, :immatriculation, :proprietaire)";
             $statement = $database->prepare($query);
