@@ -23,7 +23,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     ?>
                     <?php if ($_SESSION['role'] === 'administrateur'): ?>
                         <li class = "nav-item dropdown">
-                            <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Administrateur</a>
+                            <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Adinistrateur</a>
                             <ul class = "dropdown-menu">
                                 <li><a class = "dropdown-item" href = "router1.php?action=utilisateurReadAll">Liste des utilisateurs</a></li>
                                 <li><a class = "dropdown-item" href = "router1.php?action=utilisateurAddConducteur">Ajout d'un conducteur</a></li>
