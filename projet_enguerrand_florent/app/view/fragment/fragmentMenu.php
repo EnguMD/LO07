@@ -64,6 +64,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Examinateur</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="router1.php?action=superglobales">Superglobales</a></li>
+                        <li><a class = "dropdown-item" href = "router1.php?action=Reservation_aleatoires">Ajout de 10 réservations aléatoires</a></li>
                     </ul>
                 </li>
 

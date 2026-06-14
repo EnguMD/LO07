@@ -40,6 +40,7 @@ switch ($action) {
         break;
 
     case "superglobales" :
+    case "Reservation_aleatoires" :
         ControllerExaminateur::$action();
         break;
 
