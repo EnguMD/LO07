@@ -10,6 +10,7 @@ require ('../controller/ControllerCave.php');
 require ('../controller/ControllerExaminateur.php');
 require ('../controller/ControllerSeConnecter.php');
 require_once ('../controller/ControllerPassager.php');
+require_once ('../controller/ControllerReservation.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -34,13 +35,10 @@ switch ($action) {
         break;
 
     case "villeReadAll" :
-    case "VilleAdd" :
-    case "VilleCreated" :
         ControllerVille::$action();
         break;
 
     case "superglobales" :
-    case "Reservation_aleatoires" :
         ControllerExaminateur::$action();
         break;
 
@@ -51,6 +49,10 @@ switch ($action) {
     case "utilisateurAddPassager" :
     case "PassagerCreated" :
         ControllerPassager::$action();
+        break;
+    
+    case "passagerReserve" :
+        ControllerReservation::$action();
         break;
 
     case "utilisateurAddConducteur" :

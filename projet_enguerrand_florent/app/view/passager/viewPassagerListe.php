@@ -28,21 +28,25 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                 </thead>
                 <tbody>
                     <?php
-                    $requete = "SELECT trajet.date_depart, trajet.heure_depart, trajet.ville_depart, trajet.ville_arrivee, vehicule.modele, vehicule.immatriculation, "
+                    $requete = "SELECT trajet.date_depart, trajet.heure_depart, "
+                            . "ville_dep.nom AS ville_depart, ville_arr.nom AS ville_arrivee, "
+                            . "vehicule.modele, vehicule.immatriculation, "
                             . "CONCAT(conducteur.prenom, ' ', conducteur.nom) AS proprietaire "
-                            . "FROM trajet, vehicule, reservation, utilisateur AS passager, utilisateur AS conducteur "
+                            . "FROM trajet, vehicule, reservation, utilisateur AS passager, utilisateur AS conducteur, ville AS ville_dep, ville AS ville_arr "
                             . "WHERE passager.login = '{$_SESSION['login_id']}' "
                             . "AND passager.id = reservation.passager_id "
                             . "AND vehicule.id = trajet.vehicule_id "
                             . "AND trajet.id = reservation.trajet_id "
-                            . "AND conducteur.id = trajet.conducteur_id";
-                    echo ('<h3> Vérification de la transaction avec ' . $requete . '</h3>');
+                            . "AND conducteur.id = trajet.conducteur_id "
+                            . "AND trajet.ville_depart = ville_dep.id "
+                            . "AND trajet.ville_arrivee = ville_arr.id";
                     try {
                         $database = Model::getInstance();
                         $results = $database->query($requete);
                         $results->setFetchMode(PDO::FETCH_OBJ);
                         foreach ($results as $element) {
-                            printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->date_depart,
+                            printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+                                    $element->date_depart,
                                     $element->heure_depart, $element->ville_depart, $element->ville_arrivee,
                                     $element->proprietaire, $element->modele, $element->immatriculation);
                         }

@@ -12,6 +12,24 @@ class ControllerPassager {
             echo ("ControllerVille : villeReadAll : vue = $vue");
         require ($vue);
     }
+    
+    public static function passagerReservation() {
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/passager/viewPassagerReservation.php';
+        if (DEBUG)
+            echo ("ControllerVille : villeReadAll : vue = $vue");
+        require ($vue);
+    }
+    
+    public static function passagerReserve() {
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/passager/viewPassagerReserve.php';
+        if (DEBUG)
+            echo ("ControllerVille : villeReadAll : vue = $vue");
+        require ($vue);
+    }
 
     // Affiche le formulaire de creation d'un vin
     public static function utilisateurAddPassager() {

@@ -59,11 +59,11 @@ class ModelTrajet {
     public function setDate_depart($date_depart) {
         $this->date_depart = $date_depart;
     }
-    
+
     public function setHeure_depart($heure_depart) {
         $this->heure_depart = $heure_depart;
     }
-    
+
     public function setStatut($statut) {
         $this->statut = $statut;
     }
@@ -95,11 +95,11 @@ class ModelTrajet {
     public function getDate_depart() {
         return $this->date_depart;
     }
-    
+
     public function getHeure_depart() {
         return $this->heure_depart;
     }
-    
+
     public function getStatut() {
         return $this->statut;
     }
@@ -117,10 +117,36 @@ class ModelTrajet {
             return NULL;
         }
     }
-   
+
+    public static function insertTrajet($ville_depart, $ville_arrivee, $conducteur_id, $vehicule_id, $prix, $date_depart, $heure_depart, $statut) {
+        try {
+            $database = Model::getInstance();
+            $requete = "SELECT MAX(id) FROM trajet";
+            $statement = $database->query($requete);
+
+            $tuple = $statement->fetch();
+            $id = $tuple[0];
+            $id++;
+
+            $requete = "INSERT INTO trajet (id, ville_depart, ville_arrivee, conducteur_id, vehicule_id, prix, date_depart, heure_depart, statut) 
+                      VALUES (:id, :ville_depart, :ville_arrivee, :conducteur_id, :vehicule_id, :prix, :date_depart, :heure_depart, :statut)";
+
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id, 'ville_depart' => $ville_depart,
+                'ville_arrivee' => $ville_arrivee, 'conducteur_id' => $conducteur_id, 'vehicule_id' => $vehicule_id, 'prix' => $prix,
+                'date_depart' => $date_depart, 'heure_depart' => $heure_depart, 'statut' => $statut]); //limite de lignes de mort 😡 
+
+            return $id;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo"fonctionne pas";
+            return -1;
+        }
+    }
+
+    
 }
-
-
 ?>
 }
 ?>
