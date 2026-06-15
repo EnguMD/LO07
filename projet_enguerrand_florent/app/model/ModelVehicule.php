@@ -92,9 +92,34 @@ class ModelVehicule {
         }
     }
 
+    public static function getAllProprietaire() {
+        try {
+            $database = Model::getInstance();
+            $query = "select distinct CONCAT(prenom, ' ', nom) AS proprietaire
+                      from utilisateur 
+                      where role = 'conducteur'
+                      order by proprietaire";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
     public static function insert($marque, $modele, $annee, $immatriculation, $proprietaire) {
         try {
             $database = Model::getInstance();
+
+            $query = "select distinct id
+          from utilisateur
+          where CONCAT(prenom, ' ', nom) = :proprietaire";
+
+            $statement = $database->prepare($query);
+            $statement->execute(['proprietaire' => $proprietaire]);
+            $proprietaire_id = $statement->fetchColumn();
 
             $query = "select max(id) from vehicule";
             $statement = $database->query($query);
@@ -103,12 +128,13 @@ class ModelVehicule {
             $id++;
             $login = strtolower($nom . $prenom);
 
-            $query = "insert into vehicule value (:id, :marque, :modele, :annee, :immatriculation, :proprietaire)";
+            $query = "insert into vehicule value (:id, :marque, :modele, :annee, :immatriculation, :proprietaire_id)";
             $statement = $database->prepare($query);
             $statement->execute([
                 'id' => $id, 'marque' => $marque,
                 'modele' => $modele, 'annee' => $annee,
-                'immatriculation' => $immatriculation, 'proprietaire' => $proprietaire,
+                'immatriculation' => $immatriculation,
+                'proprietaire_id' => $proprietaire_id,
             ]);
             return $id;
         } catch (PDOException $e) {

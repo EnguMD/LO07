@@ -1,5 +1,5 @@
 
-<!-- ----- debut ModelUtilisateur -->
+<!-- ----- debut ModelReservation -->
 
 <?php
 require_once 'Model.php';
@@ -57,7 +57,69 @@ class ModelReservation {
             return NULL;
         }
     }
+public static function insert_alea() {
+        try {
+            $database = Model::getInstance();
+            $nb_reservation=0;
+            while($nb_reservation<=10) {
+                $nb_reservation++;
+                // recherche de la valeur de la clé = max(id) + 1
+                $query = "select max(id) from reservation";
+                $statement = $database->query($query);
+                $tuple = $statement->fetch();
+                $id = $tuple['0'];
+                $id++;
 
+                //trouver un trajet au pif
+                $query = "select id from trajet";
+                $statement = $database->query($query);
+                $data = $statement->fetchAll(PDO::FETCH_COLUMN);
+                $trajet_id = $data[array_rand($data)];
+
+                //trouver un passager au pif
+                $query = "select id from utilisateur where role = 'passager'";
+                $statement = $database->query($query);
+                $data = $statement->fetchAll(PDO::FETCH_COLUMN);
+                $passager_id = $data[array_rand($data)];
+
+                // ajout d'un nouveau tuple;
+                $query = "insert into reservation value (:id, :trajet_id, :passager_id)";
+                $statement = $database->prepare($query);
+                $statement->execute([
+                    'id' => $id,
+                    'trajet_id' => $trajet_id,
+                    'passager_id' => $passager_id,
+                ]);
+
+                $query = "SELECT CONCAT(vd.nom, '-->', va.nom) AS resultat
+                        FROM trajet t
+                        JOIN ville vd ON vd.id = t.ville_depart
+                        JOIN ville va ON va.id = t.ville_arrivee
+                        WHERE t.id = :trajet_id
+                        ";
+                $statement = $database->prepare($query);
+                $statement->execute(['trajet_id' => $trajet_id]);
+                $trajet = $statement->fetchColumn();
+
+                $query = "select CONCAT(prenom, ' ', nom)
+                        from utilisateur
+                        where id = :passager_id";
+                $statement = $database->prepare($query);
+                $statement->execute(['passager_id' => $passager_id]);
+                $passager = $statement->fetchColumn();
+
+                $results[] = [
+                    'trajet' => $trajet,
+                    'passager' => $passager
+                ];
+            }
+
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return -1;
+        }
+    }
     public static function insert($trajet_id, $passager_id) {
         try {
             $database = Model::getInstance();

@@ -35,10 +35,13 @@ switch ($action) {
         break;
 
     case "villeReadAll" :
+         case "VilleAdd" :
+    case "VilleCreated" :
         ControllerVille::$action();
         break;
 
     case "superglobales" :
+    case "Reservation_aleatoires" :
         ControllerExaminateur::$action();
         break;
 
