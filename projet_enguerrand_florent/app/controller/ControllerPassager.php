@@ -9,7 +9,7 @@ class ControllerPassager {
         include 'config.php';
         $vue = $root . '/app/view/passager/viewPassagerListe.php';
         if (DEBUG)
-            echo ("ControllerVille : villeReadAll : vue = $vue");
+            echo ("ControllerPassager : passagerListe : vue = $vue");
         require ($vue);
     }
     
@@ -18,7 +18,7 @@ class ControllerPassager {
         include 'config.php';
         $vue = $root . '/app/view/passager/viewPassagerReservation.php';
         if (DEBUG)
-            echo ("ControllerVille : villeReadAll : vue = $vue");
+             echo ("ControllerPassager : passagerReservation : vue = $vue");
         require ($vue);
     }
     
@@ -27,7 +27,7 @@ class ControllerPassager {
         include 'config.php';
         $vue = $root . '/app/view/passager/viewPassagerReserve.php';
         if (DEBUG)
-            echo ("ControllerVille : villeReadAll : vue = $vue");
+             echo ("ControllerPassager : passagerReserve: vue = $vue");
         require ($vue);
     }
 
@@ -36,21 +36,18 @@ class ControllerPassager {
         // ----- Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/passager/viewInsert.php';
+        if(DEBUG)
+             echo ("ControllerPassager : utilisateurAddPassager : vue = $vue");
         require ($vue);
     }
-
-    // Affiche un formulaire pour récupérer les informations d'un nouveau vin.
-    // La clé est gérée par le systeme et pas par l'internaute
+    
     public static function PassagerCreated() {
-        // ajouter une validation des informations du formulaire
         $results = ModelUtilisateur::insert(
-                htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), "passager", "secret", htmlspecialchars($_GET['solde'])
-        );
-        // ----- Construction chemin de la vue
+                htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), "passager", "secret", htmlspecialchars($_GET['solde']) );
         include 'config.php';
         $vue = $root . '/app/view/passager/viewInserted.php';
         require ($vue);
     }
 }
 ?>
-<!-- ----- fin ControllerVille -->
+<!-- ----- fin ControllerPassager -- -->

@@ -47,7 +47,7 @@ class ModelReservation {
     public static function getAll() {
         try {
             $database = Model::getInstance();
-            $query = "select * from trajet";
+            $query = "select * from reservation";
             $statement = $database->prepare($query);
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelReservation");
@@ -61,21 +61,41 @@ class ModelReservation {
     public static function insert($trajet_id, $passager_id) {
         try {
             $database = Model::getInstance();
+
+            //Permet de freeze la bdd
+            $database->beginTransaction();
+
+            //Créer nvl res avec id unique
             $query = "SELECT MAX(id) FROM reservation";
             $statement = $database->query($query);
             $tuple = $statement->fetch();
             $id = $tuple[0];
             $id++;
 
-            $query = "INSERT INTO reservation (id, trajet_id, passager_id) VALUES (:id, :trajet_id, :passager_id)";
-            $statement = $database->prepare($query);
-            $statement->execute([
+            // Reservation dans sa table
+            $queryInsert = "INSERT INTO reservation (id, trajet_id, passager_id) VALUES (:id, :trajet_id, :passager_id)";
+            $statementInsert = $database->prepare($queryInsert);
+            $statementInsert->execute([
                 'id' => $id,
                 'trajet_id' => $trajet_id,
-                'passager_id' => $passager_id]);
+                'passager_id' => $passager_id
+            ]);
 
+            //Mise a jour du solde
+            $queryUpdate = "UPDATE utilisateur SET solde = solde - (SELECT prix FROM trajet WHERE id = :trajet_id) WHERE id = :passager_id";
+            $statementUpdate = $database->prepare($queryUpdate);
+            $statementUpdate->execute([
+                'trajet_id' => $trajet_id,
+                'passager_id' => $passager_id
+            ]);
+
+            // Tout est nickel on valide dans la bdd
+            $database->commit();
             return $id;
         } catch (PDOException $e) {
+
+            //Si problème on rollback
+            $database->rollBack();
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
         }

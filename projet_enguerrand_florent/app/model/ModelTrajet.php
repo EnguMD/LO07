@@ -118,33 +118,86 @@ class ModelTrajet {
         }
     }
 
-    public static function insertTrajet($ville_depart, $ville_arrivee, $conducteur_id, $vehicule_id, $prix, $date_depart, $heure_depart, $statut) {
+    public static function insert($ville_depart, $ville_arrivee, $vehicule_id, $prix, $date_depart, $heure_depart, $conducteur_id) {
         try {
             $database = Model::getInstance();
-            $requete = "SELECT MAX(id) FROM trajet";
-            $statement = $database->query($requete);
 
+            $query = "SELECT MAX(id) FROM trajet";
+            $statement = $database->query($query);
             $tuple = $statement->fetch();
             $id = $tuple[0];
             $id++;
 
-            $requete = "INSERT INTO trajet (id, ville_depart, ville_arrivee, conducteur_id, vehicule_id, prix, date_depart, heure_depart, statut) 
-                      VALUES (:id, :ville_depart, :ville_arrivee, :conducteur_id, :vehicule_id, :prix, :date_depart, :heure_depart, :statut)";
+            $queryInsert = "INSERT INTO trajet (id, ville_depart, ville_arrivee, date_depart, heure_depart, prix, conducteur_id, vehicule_id, statut) "
+                    . "VALUES (:id, :ville_depart, :ville_arrivee, :date_depart, :heure_depart, :prix, :conducteur_id, :vehicule_id, 'actif')";
 
-            $statement = $database->prepare($query);
-            $statement->execute([
-                'id' => $id, 'ville_depart' => $ville_depart,
-                'ville_arrivee' => $ville_arrivee, 'conducteur_id' => $conducteur_id, 'vehicule_id' => $vehicule_id, 'prix' => $prix,
-                'date_depart' => $date_depart, 'heure_depart' => $heure_depart, 'statut' => $statut]); //limite de lignes de mort 😡 
+            $statementInsert = $database->prepare($queryInsert);
+            $statementInsert->execute([
+                'id' => $id,
+                'ville_depart' => $ville_depart, 'ville_arrivee' => $ville_arrivee,
+                'date_depart' => $date_depart, 'heure_depart' => $heure_depart,
+                'prix' => $prix,
+                'conducteur_id' => $conducteur_id, 'vehicule_id' => $vehicule_id
+            ]);
 
             return $id;
-        } catch (Exception $ex) {
-            echo $ex->getMessage();
-            echo"fonctionne pas";
-            return -1;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
         }
     }
+    
+    public static function fermer($trajet_id, $conducteur_id) {
+        try {
+            $database = Model::getInstance();
+            $database->beginTransaction();
 
+            //prix
+            $queryPrix = "SELECT prix FROM trajet WHERE id = :id";
+            $statementPrix = $database->prepare($queryPrix);
+            $statementPrix->execute(['id' => $trajet_id]);
+            $prix = $statementPrix->fetch()[0];
+
+            //Nbpassager
+            $queryNbPassager = "SELECT COUNT(*) FROM reservation WHERE trajet_id = :id";
+            $statementNbPassager = $database->prepare($queryNbPassager);
+            $statementNbPassager->execute(['id' => $trajet_id]);
+            $nbPassagers = $statementNbPassager->fetch()[0];
+
+            //Gain total
+            $gain = $prix * $nbPassagers;
+
+            //donne au cdteur
+            if ($gain > 0) {
+                $queryUpdateSolde = "UPDATE utilisateur SET solde = solde + :gain WHERE id = :id";
+                $statementUpdateSolde = $database->prepare($queryUpdateSolde);
+                $statementUpdateSolde->execute([
+                    'gain' => $gain,
+                    'id' => $conducteur_id ]);
+            }
+
+            // tej les res
+            $queryDeleteRes = "DELETE FROM reservation WHERE trajet_id = :id";
+            $statementDeleteRes = $database->prepare($queryDeleteRes);
+            $statementDeleteRes->execute(['id' => $trajet_id]);
+
+            // ->passif
+            $queryUpdateStatut = "UPDATE trajet SET statut = 'passif' WHERE id = :id";
+            $statementUpdateStatut = $database->prepare($queryUpdateStatut);
+            $statementUpdateStatut->execute(['id' => $trajet_id]);
+
+            // all good
+            $database->commit();
+            return $gain;
+
+        } catch (PDOException $e) {
+            //ou on rollback si y a un pbm
+            $database->rollBack();
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
     
 }
 ?>

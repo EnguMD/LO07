@@ -102,14 +102,14 @@ class ModelUtilisateur {
         try {
             $database = Model::getInstance();
 
-            // recherche de la valeur de la clé = max(id) + 1
+           
             $query = "select max(id) from utilisateur";
             $statement = $database->query($query);
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
             $login = strtolower($nom . $prenom);
-            // ajout d'un nouveau tuple;
+            
             $query = "insert into utilisateur value (:id, :nom, :prenom, :role, :login, :password, :solde)";
             $statement = $database->prepare($query);
             $statement->execute([

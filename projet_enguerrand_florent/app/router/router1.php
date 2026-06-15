@@ -6,7 +6,7 @@ require ('../controller/ControllerConducteur.php');
 require ('../controller/ControllerPassager.php');
 require ('../controller/ControllerVehicule.php');
 require ('../controller/ControllerVille.php');
-require ('../controller/ControllerCave.php');
+require ('../controller/ControllerAccueil.php');
 require ('../controller/ControllerExaminateur.php');
 require ('../controller/ControllerSeConnecter.php');
 require_once ('../controller/ControllerPassager.php');
@@ -45,18 +45,27 @@ switch ($action) {
     // Tache par défaut
     case "passagerListe" :
     case "passagerReservation" :
-    case "passagerInnovation" :
     case "utilisateurAddPassager" :
     case "PassagerCreated" :
         ControllerPassager::$action();
         break;
-    
+
     case "passagerReserve" :
+    case "passagerReserveSuccess" :
         ControllerReservation::$action();
         break;
 
     case "utilisateurAddConducteur" :
     case "ConducteurCreated" :
+    case "conducteurVehiculeListe" :
+    case "conducteurTrajetListe" :
+    case "conducteurTrajetAjout" :
+    case "conducteurTrajetAjoute" :
+    case "conducteurTrajetAjouteSuccess" :
+    case "conducteurTrajetListePassager" :
+    case "conducteurTrajetFermer" :
+    case "conducteurTrajetFerme" :
+    case "conducteurTrajetFermeSuccess" :
         ControllerConducteur::$action();
         break;
 
@@ -68,8 +77,8 @@ switch ($action) {
 
     // Tache par défaut
     default:
-        $action = "caveAccueil";
-        ControllerCave::$action();
+        $action = "covoiturageAccueil";
+        ControllerAccueil::$action();
 }
 ?>
 <!-- ----- Fin Router1 -->

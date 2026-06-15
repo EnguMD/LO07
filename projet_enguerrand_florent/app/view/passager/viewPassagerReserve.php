@@ -13,12 +13,12 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
         include $root . '/app/view/fragment/fragmentJumbotron.html';
         ?>
         <h3>
-        <?php
-        echo "Réservation pour le trajet n°" . $trajet_id_choisi ." confirmée :)"
-        ?>
-            <br>
-            Vous pouvez regardez directement depuis ici toutes vos réservations !</h3><br>
-        <a href="../router1.php?action=passagerListe"><h4>Voir mes réservations</h4></a>
-
+            <?php
+            echo "Réservation pour le trajet n°" . $trajet_id_choisi . " confirmée :)"
+            ?>
+            <br><br>
+            <a href="router1.php?action=passagerListe" class="btn btn-info">Voir mes réservations</a>
+            <a href="router1.php?action=" class="btn btn-secondary" style="margin-left:0.1rem;">Retourner à l'accueil</a>
+            <br><br>
     </div>
     <?php include $root . '/app/view/fragment/fragmentFooter.html'; ?>

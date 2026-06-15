@@ -15,11 +15,14 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
 
 
         <?php
-        $requete = "SELECT trajet.id AS trajet_id, depart.nom AS ville_depart, arrivee.nom AS ville_arrivee, trajet.date_depart, trajet.heure_depart, trajet.statut, trajet.prix "
-                . "FROM trajet, ville AS depart, ville AS arrivee "
-                . "WHERE statut = 'actif' "
-                . "AND trajet.ville_depart = depart.id "
-                . "AND trajet.ville_arrivee = arrivee.id";
+        $requete = "SELECT trajet.id AS trajet_id, ville_dep.nom AS ville_depart, ville_arr.nom AS ville_arrivee, trajet.date_depart, trajet.heure_depart, trajet.statut, trajet.prix, passager.solde "
+                . "FROM trajet, vehicule, utilisateur AS passager, utilisateur AS conducteur, ville AS ville_dep, ville AS ville_arr "
+                . "WHERE passager.login = '{$_SESSION['login_id']}' "
+                . "AND trajet.statut = 'actif' "
+                . "AND vehicule.id = trajet.vehicule_id "
+                . "AND conducteur.id = trajet.conducteur_id "
+                . "AND trajet.ville_depart = ville_dep.id "
+                . "AND trajet.ville_arrivee = ville_arr.id";
 
         echo ('<h3> Réserver ma poule ? </h3>');
         try {
@@ -27,17 +30,35 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
             $results = $database->query($requete);
             $results->setFetchMode(PDO::FETCH_OBJ);
             echo"<form method='post' action='router1.php?action=passagerReserve'>";
-            echo"<select name=reservationTrajet id=reservationTrajet>";
-            echo"<option value='' selected disabled>----------------------------Sélectionnez un trajet----------------------------</option>";
+            echo"<select name=reservationTrajet id=reservationTrajet required>";
+            echo"<option value='' selected disabled>------------------------------Sélectionnez un trajet------------------------------</option>";
+
             foreach ($results as $element) {
-                printf("<option value = %s >%s -->  %s le %s à %s pour %s</option>",
-                        $element->trajet_id, $element->ville_depart, $element->ville_arrivee,
-                        $element->date_depart, $element->heure_depart, $element->prix);
-                
+
+                $attribut_disabled = '';
+                $message_solde = '';
+
+                if ($element->solde < $element->prix) {
+                    $attribut_disabled = 'disabled';
+                    $message_solde = "(SOLDE INSUFFISANT)";
+                }
+
+                printf("<option value='%s' %s>%s --> %s le %s à %s pour %s € %s</option>",
+                        $element->trajet_id,
+                        $attribut_disabled,
+                        ucfirst($element->ville_depart),
+                        ucfirst($element->ville_arrivee),
+                        $element->date_depart,
+                        $element->heure_depart,
+                        $element->prix,
+                        $message_solde);
             }
+
             echo"</select>";
-            echo"<br>";
-            echo"<input class='btn btn-primary' type='submit' value='Submit'>";
+            echo"<br><br>";
+            echo"<button class = 'btn btn-primary' type = 'submit'>Réserver le trajet</button>";
+            echo"<button class = 'btn btn-secondary' type = 'reset' style='margin-left:0.1rem'>Reset</button>";
+            echo"<br><br>";
             echo"</form>";
         } catch (Exception $ex) {
             echo $ex->getMessage();

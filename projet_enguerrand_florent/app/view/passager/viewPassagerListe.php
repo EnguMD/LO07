@@ -47,16 +47,23 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
                         foreach ($results as $element) {
                             printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
                                     $element->date_depart,
-                                    $element->heure_depart, $element->ville_depart, $element->ville_arrivee,
-                                    $element->proprietaire, $element->modele, $element->immatriculation);
+                                    $element->heure_depart, 
+                                    ucfirst($element->ville_depart), 
+                                    ucfirst($element->ville_arrivee),
+                                    ucfirst($element->proprietaire), 
+                                    ucfirst($element->modele), 
+                                    strtoupper($element->immatriculation));
                         }
-                        echo "Fonctionne.";
+                        //echo "Fonctionne.";
                     } catch (Exception $ex) {
                         echo $ex->getMessage();
                     }
                     ?>
                 </tbody>
             </table>
+            <br>
+            <a href="router1.php?action=caveAccueil" class="btn btn-secondary" style="margin-left:0.5rem;">Retourner à l'accueil</a>
+            <br><br>
         </div>
     </div>
     <?php include $root . '/app/view/fragment/fragmentFooter.html'; ?>

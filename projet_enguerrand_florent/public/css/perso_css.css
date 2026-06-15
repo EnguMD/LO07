@@ -10,5 +10,70 @@ body {
 }
 
 .jumbotron {
-  background-color:plum;
+    background-color:plum;
+}
+
+
+.premium-input-group {
+    position: relative;
+    max-width: 280px;
+    margin: 20px 0;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.premium-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.95rem;
+}
+
+.premium-input-wrapper {
+    position: relative;
+}
+
+.premium-input {
+    width: 100%;
+    padding: 14px 15px 14px 40px; 
+    font-size: 1rem;
+    color: #2d3748;
+    background-color: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px; 
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.premium-currency {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    pointer-events: none; 
+    transition: color 0.3s ease;
+}
+
+.premium-input:focus {
+    border-color: #4299e1; 
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(66, 153, 225, 0.15), 0 4px 10px rgba(0,0,0,0.05);
+    transform: translateY(-2px); 
+}
+
+.premium-input:focus + .premium-currency {
+    color: #4299e1;
+}
+
+.premium-input::-webkit-outer-spin-button,
+.premium-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.premium-input[type=number] {
+    -moz-appearance: textfield;
 }

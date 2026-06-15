@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <nav class="navbar navbar-expand-lg bg-success fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="router1.php?action=CaveAccueil">MARTINAUD et LASCOURS</a>
+        <a class="navbar-brand" href="router1.php?action=covoiturageAccueil">MARTINAUD et LASCOURS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,9 +40,11 @@ if (session_status() === PHP_SESSION_NONE) {
                         <li class = "nav-item dropdown">
                             <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Conducteur</a>
                             <ul class = "dropdown-menu">
-                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadAll">Liste des vins</a></li>
-                                <li><a class = "dropdown-item" href = "router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
-                                <li><a class="dropdown-item" href="router1.php?action=vinCreate">Insertion d'un vin</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=conducteurVehiculeListe">Liste de mes véhicules</a></li>
+                                <li><a class = "dropdown-item" href = "router1.php?action=conducteurTrajetListe">Liste de mes trajets</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetAjout">Ajout d'un trajet</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetListePassager">Liste des passagers pour un trajet</a></li>
+                                <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetFermer">Clôturer un trajet</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>
@@ -52,7 +54,6 @@ if (session_status() === PHP_SESSION_NONE) {
                             <ul class = "dropdown-menu">
                                 <li><a class = "dropdown-item" href = "router1.php?action=passagerListe">Liste de mes réservations</a></li>
                                 <li><a class = "dropdown-item" href = "router1.php?action=passagerReservation">Réservation d’un trajet actif</a></li>
-                                <li><a class="dropdown-item" href="router1.php?action=passagerInnovation">Innovation</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>
