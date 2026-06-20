@@ -37,28 +37,29 @@ if (session_status() === PHP_SESSION_NONE) {
                             </ul>
                         </li>
                     <?php endif; ?>
-                    <?php if ($_SESSION['role'] === 'conducteur'): ?>
-                        <li class = "nav-item dropdown">
-                            <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Conducteur</a>
-                            <ul class = "dropdown-menu">
-                                <li><a class = "dropdown-item" href = "router1.php?action=conducteurVehiculeListe">Liste de mes véhicules</a></li>
-                                <li><a class = "dropdown-item" href = "router1.php?action=conducteurTrajetListe">Liste de mes trajets</a></li>
-                                <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetAjout">Ajout d'un trajet</a></li>
-                                <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetListePassager">Liste des passagers pour un trajet</a></li>
-                                <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetFermer">Clôturer un trajet</a></li>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
-                    <?php if ($_SESSION['role'] === 'passager'): ?>
-                        <li class = "nav-item dropdown">
-                            <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Passager</a>
-                            <ul class = "dropdown-menu">
-                                <li><a class = "dropdown-item" href = "router1.php?action=passagerListe">Liste de mes réservations</a></li>
-                                <li><a class = "dropdown-item" href = "router1.php?action=passagerReservation">Réservation d’un trajet actif</a></li>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
-                <?php endif; ?>
+                     <?php if ($_SESSION['role'] === 'conducteur'): ?>
+                                <li class = "nav-item dropdown">
+                                    <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Conducteur</a>
+                                    <ul class = "dropdown-menu">
+                                        <li><a class = "dropdown-item" href = "router1.php?action=conducteurVehiculeListe">Liste de mes véhicules</a></li>
+                                        <li><a class = "dropdown-item" href = "router1.php?action=conducteurTrajetListe">Liste de mes trajets</a></li>
+                                        <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetAjout">Ajout d'un trajet</a></li>
+                                        <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetListePassager">Liste des passagers pour un trajet</a></li>
+                                        <li><a class="dropdown-item" href="router1.php?action=conducteurTrajetFermer">Clôturer un trajet</a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                            <?php if ($_SESSION['role'] === 'passager'): ?>
+                                <li class = "nav-item dropdown">
+                                    <a class = "nav-link dropdown-toggle" role = "button" data-bs-toggle = "dropdown" aria-expanded = "false">Passager</a>
+                                    <ul class = "dropdown-menu">
+                                        <li><a class = "dropdown-item" href = "router1.php?action=passagerListe">Liste de mes réservations</a></li>
+                                        <li><a class = "dropdown-item" href = "router1.php?action=passagerReservation">Réservation d’un trajet actif</a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
 
 
                 <li class="nav-item dropdown">
@@ -76,6 +77,14 @@ if (session_status() === PHP_SESSION_NONE) {
                         <li><a class="dropdown-item" href="router1.php?action=SeConnecterDeconnexion">Déconnexion</a></li>
                     </ul>
                 </li>
+                 <?php if ($_SESSION['login_id'] !== -1): ?>
+                    <?php if ($_SESSION['role'] === 'passager'): ?>
+                        <form class="d-flex ms-3" role="search" method="post" action="router1.php?action=passagerRechercheTrajet">
+                            <input class="form-control me-2" type="search" placeholder="Chercher une ville..." aria-label="Search" name="rechercheVille" required>
+                            <button class="btn btn-outline-light" type="submit">Rechercher</button>
+                        </form>
+                    <?php endif; ?>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

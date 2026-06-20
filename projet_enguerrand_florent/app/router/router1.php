@@ -35,7 +35,7 @@ switch ($action) {
         break;
 
     case "villeReadAll" :
-         case "VilleAdd" :
+    case "VilleAdd" :
     case "VilleCreated" :
         ControllerVille::$action();
         break;
@@ -49,6 +49,7 @@ switch ($action) {
     case "passagerListe" :
     case "passagerReservation" :
     case "utilisateurAddPassager" :
+    case "passagerRechercheTrajet" :
     case "PassagerCreated" :
         ControllerPassager::$action();
         break;

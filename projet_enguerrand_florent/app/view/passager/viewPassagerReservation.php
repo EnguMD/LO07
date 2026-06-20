@@ -30,7 +30,7 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
             $results = $database->query($requete);
             $results->setFetchMode(PDO::FETCH_OBJ);
             echo"<form method='post' action='router1.php?action=passagerReserve'>";
-            echo"<select name=reservationTrajet id=reservationTrajet required>";
+            echo"<select class='form-select mb-3' name=reservationTrajet id=reservationTrajet required>";
             echo"<option value='' selected disabled>------------------------------Sélectionnez un trajet------------------------------</option>";
 
             foreach ($results as $element) {
@@ -55,7 +55,6 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
             }
 
             echo"</select>";
-            echo"<br><br>";
             echo"<button class = 'btn btn-primary' type = 'submit'>Réserver le trajet</button>";
             echo"<button class = 'btn btn-secondary' type = 'reset' style='margin-left:0.1rem'>Reset</button>";
             echo"<br><br>";

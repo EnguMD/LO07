@@ -30,6 +30,13 @@ class ControllerPassager {
              echo ("ControllerPassager : passagerReserve: vue = $vue");
         require ($vue);
     }
+    public static function passagerRechercheTrajet() {
+        include 'config.php';
+        $vue = $root . '/app/view/passager/viewPassagerRechercheTrajetReservation.php';
+        if (DEBUG)
+            echo ("ControllerPassager : passagerRechercheTrajet : vue = $vue");
+        require ($vue);
+    }
 
     // Affiche le formulaire de creation d'un vin
     public static function utilisateurAddPassager() {
