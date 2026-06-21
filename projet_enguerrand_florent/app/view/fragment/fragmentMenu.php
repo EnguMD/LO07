@@ -63,6 +63,15 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovation</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="router1.php?action=innovation_projet">Innovation projet</a></li>
+                        <li><a class = "dropdown-item" href = "router1.php?action=innovation_MVC">Innovation MVC</a></li>
+                    </ul>
+                </li>
+                
+                
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Examinateur</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="router1.php?action=superglobales">Superglobales</a></li>

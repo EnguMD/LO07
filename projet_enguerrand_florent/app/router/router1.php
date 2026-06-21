@@ -9,6 +9,7 @@ require ('../controller/ControllerVille.php');
 require ('../controller/ControllerAccueil.php');
 require ('../controller/ControllerExaminateur.php');
 require ('../controller/ControllerSeConnecter.php');
+require ('../controller/ControllerInnovation.php');
 require_once ('../controller/ControllerPassager.php');
 require_once ('../controller/ControllerReservation.php');
 
@@ -57,6 +58,11 @@ switch ($action) {
     case "passagerReserve" :
     case "passagerReserveSuccess" :
         ControllerReservation::$action();
+        break;
+
+    case "innovation_projet" :
+    case "innovation_MVC" :
+        ControllerInnovation::$action();
         break;
 
     case "utilisateurAddConducteur" :
