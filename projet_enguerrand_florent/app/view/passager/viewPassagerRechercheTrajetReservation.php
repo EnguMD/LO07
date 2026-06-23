@@ -45,37 +45,36 @@ require ($root . '/app/view/fragment/fragmentHeader.html');
             $results = $statement->fetchAll();
 
             if (count($results) > 0) {
-                echo "<form method='post' action='router1.php?action=passagerReserve'>";
+                           echo"<form method='post' action='router1.php?action=passagerReserve'>";
+            echo"<select class='form-select mb-3' name=reservationTrajet id=reservationTrajet required>";
+            echo"<option value='' selected disabled>------------------------------Sélectionnez un trajet------------------------------</option>";
 
-                echo "<div class='form-group mb-4'>";
+            foreach ($results as $element) {
 
-                foreach ($results as $element) {
-                    $attribut_disabled = '';
-                    $message_solde = '';
+                $attribut_disabled = '';
+                $message_solde = '';
 
-                    if ($element->solde < $element->prix) {
-                        $attribut_disabled = 'disabled';
-                        $message_solde = " (SOLDE INSUFFISANT)";
-                    }
-
-                    printf("<div class='form-check'>
-                        <label class='btn btn-outline-primary mb-3' for='trajet_%s'>
-                        <input type='radio' class='form-check-input'  name='reservationTrajet' id='trajet_%s' value='%s' autocomplete='off' required>
-                                %s --> %s le %s à %s pour %s € %s
-                            </label>
-                        </div>",
-                            $element->trajet_id, $element->trajet_id, $attribut_disabled,
-                            $element->trajet_id, ucfirst($element->ville_depart),
-                            ucfirst($element->ville_arrivee), $element->date_depart,
-                            $element->heure_depart, $element->prix, $message_solde);
+                if ($element->solde < $element->prix) {
+                    $attribut_disabled = 'disabled';
+                    $message_solde = "(SOLDE INSUFFISANT)";
                 }
 
-                echo "</div>";
+                printf("<option value='%s' %s>%s --> %s le %s à %s pour %s € %s</option>",
+                        $element->trajet_id,
+                        $attribut_disabled,
+                        ucfirst($element->ville_depart),
+                        ucfirst($element->ville_arrivee),
+                        $element->date_depart,
+                        $element->heure_depart,
+                        $element->prix,
+                        $message_solde);
+            }
 
-                echo "<button class='btn btn-primary' type='submit'>Réserver le trajet</button>";
-                echo "<button class='btn btn-secondary' type='reset' style='margin-left:0.5rem'>Reset</button>";
-                echo "<br><br>";
-                echo "</form>";
+            echo"</select>";
+            echo"<button class = 'btn btn-primary' type = 'submit'>Réserver le trajet</button>";
+            echo"<button class = 'btn btn-secondary' type = 'reset' style='margin-left:0.1rem'>Reset</button>";
+            echo"<br><br>";
+            echo"</form>";
             } else {
                 echo "<div class='alert alert-warning'>Aucun trajet actif ne correspond à votre recherche de ville.</div>";
                 echo "<br>";
