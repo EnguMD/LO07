@@ -126,7 +126,7 @@ class ModelVehicule {
             $tuple = $statement->fetch();
             $id = $tuple['0'];
             $id++;
-            $login = strtolower($nom . $prenom);
+//            $login = strtolower($nom . $prenom);
 
             $query = "insert into vehicule value (:id, :marque, :modele, :annee, :immatriculation, :proprietaire_id)";
             $statement = $database->prepare($query);

@@ -19,7 +19,7 @@ class ControllerVehicule {
 
     // Affiche le formulaire de creation d'un vin
  public static function VehiculeAdd() {
-        $results = ModelVehicule::getAllPropietaire();
+        $results = ModelVehicule::getAllProprietaire();
         include 'config.php';
         $vue = $root . '/app/view/vehicule/viewInsert.php';
         require ($vue);
